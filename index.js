@@ -37,7 +37,15 @@ app.put("/department/:id", (req, res) => {
     let id = req.params.id;
     let findD = department.findIndex((e) => e.id == id);
     if (findD == -1) res.send("ไม่พบข้อมูล");
-    let deleteD = department.slice(findD, 1);
+    department[findD].name = req.body.name;
+    res.send(department[findD]);
+});
+
+app.delete("/department/:id", (req, res) => {
+    let id = req.params.id;
+    let findD = department.findIndex((e) => e.id == id);
+    if (findD == -1) res.send("ไม่พบข้อมูล");
+    let deleteD = department.splice(findD, 1);
     res.send(deleteD);
 });
 
